@@ -13,7 +13,7 @@
 ### Взаимодействие с другими микросервисамисервисами
 Сервис обменивается данными с:
 - **[TelegramBot](https://github.com/svetlana7474/PIUS)**  — для полчения запросов на шифрование/дешифрование файлов.
-- **[EncryptionService]((https://github.com/Jotaro220/EncryptionService))**  — для шифрования/дешифрования файлов.
+- **[EncryptionService](https://github.com/Jotaro220/EncryptionService)**  — для шифрования/дешифрования файлов.
 
 ---
 
