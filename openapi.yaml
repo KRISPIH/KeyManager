@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: KeyGenerator
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000/api/v1
+    description: Encryption key management service
+paths:
+  /key/generate:
+    post:
+      summary: Generate a unique encryption key for a file
+      operationId: generateKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                telegram_code:
+                  type: string
+                  description: The telegram code of the user requesting the key
+                  maxLength: 10
+                  example: "123456"
+                file_name:
+                  type: string
+                  description: The name of the file to generate the key for
+                  maxLength: 100
+                  example: "video.mp4"
+      responses:
+        '201':
+          description: Key successfully generated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The ID of the generated key record
+                    example: 1
+                  key:
+                    type: string
+                    description: The generated encryption key
+                    example: "x2Er1bWsXR0HnvGWyuIvpGuuySxjenFzjCLbGXVBCbE3Z8GfPqho"
+        '400':
+          description: Incorrect input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error during key generation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /key/get_key:
+    post:
+      summary: Retrieve an encryption key for a specific file by ID and telegram code
+      operationId: getKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: The ID of the key record
+                  example: 4
+                telegram_code:
+                  type: string
+                  description: The telegram code of the user requesting the key
+                  maxLength: 10
+                  example: "123456"
+      responses:
+        '200':
+          description: Key successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    description: The encryption key
+                    example: "x2Er1bWsXR0HnvGWyuIvpGuuySxjenFzjCLbGXVBCbE3Z8GfPqho"
+        '400':
+          description: Incorrect input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Key not found or access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error during key lookup
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Error code
+          example: 400
+        message:
+          type: string
+          description: Error message
+          example: "Incorrect input data"

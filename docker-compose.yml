@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  key-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: key-generator
+    ports:
+      - "9000:8000"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - postgres
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: encr_data
+      DB_USERNAME: kris
+      DB_PASSWORD: password
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    #ports:
+  
+    environment:
+      POSTGRES_DB: encr_data
+      POSTGRES_USER: kris
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  
+
+volumes:
+  pgdata:

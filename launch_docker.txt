@@ -1,0 +1,19 @@
+запуск 1 контейнера отдельно
+docker run -it -p 9000:9000 -v $(pwd):/var/www key-generator bash
+root@365a63e58c1c:/var/www# 
+чтобы выйти exit
+оставить контейнер работающим (Ты выйдешь из контейнера, но он продолжит работать в фоне.)
+Ctrl + P, потом Ctrl + Q
+ 
+ports:
+      - "5432:5432"
+
+отвечает за сбор все контейнеров
+docker compose up --build -d
+
+чтобы попасть внутрь моего контейнера 
+docker exec -it key-generator bash
+
+php artisan serve --host=0.0.0.0 --port=8000
+
+docker compose down
