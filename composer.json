@@ -56,8 +56,13 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
-        ]
+        ],
+       
+      "lint": "phpcs",
+      "lint-fix": "phpcbf",
+      "cs-fix": "php-cs-fixer fix"
     },
+    
     "extra": {
         "laravel": {
             "dont-discover": []
