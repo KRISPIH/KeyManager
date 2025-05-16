@@ -51,5 +51,5 @@ docker-compose up
 
 ## Контакты
 - **Разработчик**: 
-  - [Кужненков Кирилл](https://github.com/Jotaro220)
-- [Telegram](https://t.me/Kirill356909)
+  - [KRISPIH](https://github.com/KRISPIH)
+  
